@@ -1,15 +1,18 @@
 import matplotlib.pyplot as plt
 
-def scatter_plot(x, y, m='+', xlabel='X', ylabel='Y', title='scatter plot'):
+def scatter_plot(x, y, m='+', xlabel='X', ylabel='Y', title='scatter plot', show=True):
     plt.scatter(x, y, marker=m)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
+    
+    if show:
+        plt.show()
+    else:
+        return plt
 
-    plt.show()
-
-def plot(y, x=None, xlabel='X', ylabel='Y', title='plot'):
-    if not x:
+def plot(y, x=None, xlabel='X', ylabel='Y', title='plot', show=True):
+    if x is None:
         x = [i for i in range(len(y))]
 
     assert len(x) == len(y), 'for plotting, length must be equal'
@@ -19,4 +22,15 @@ def plot(y, x=None, xlabel='X', ylabel='Y', title='plot'):
     plt.ylabel(ylabel)
     plt.title(title)
 
+    if show:
+        plt.show()
+    else:
+        return plt
+
+def surface_plot(x, y, z):
+    fig = plt.figure()
+    ax = plt.axes(projection='3d')
+
+    ax.plot_surface(x, y, z,cmap='viridis', edgecolor='none')
+    ax.set_title('loss surface plot')
     plt.show()
