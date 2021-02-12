@@ -3,7 +3,7 @@ import numpy as np
 
 from plot_data import scatter_plot
 from loss import mse_loss
-
+from gradient_descent import gd
 
 if __name__=='__main__':
     #load data
@@ -23,4 +23,5 @@ if __name__=='__main__':
     iterations = 1500
     alpha = 0.01
 
-    print(mse_loss(X, y, theta))
+    history, theta = gd(X, y, theta, alpha, iterations)
+    print(theta)
