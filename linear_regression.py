@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from plot_data import scatter_plot
+from plot_data import scatter_plot, plot
 from loss import mse_loss
 from gradient_descent import gd
 
@@ -24,4 +24,4 @@ if __name__=='__main__':
     alpha = 0.01
 
     history, theta = gd(X, y, theta, alpha, iterations)
-    print(theta)
+    plot(history, xlabel='iterations', ylabel='loss values', title='training loss')

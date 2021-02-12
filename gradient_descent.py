@@ -16,6 +16,6 @@ def gd(X, y, theta, alpha, num_iter):
         theta[1][0] = theta[1][0] - alpha * ((1/m)*gradient2)
 
         l_hist.append(mse_loss(X, y, theta))
-        print('Loss: ', l_hist[-1])
+        #print('Loss: ', l_hist[-1])
 
     return l_hist, theta
