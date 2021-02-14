@@ -34,3 +34,12 @@ def surface_plot(x, y, z):
     ax.plot_surface(x, y, z,cmap='viridis', edgecolor='none')
     ax.set_title('loss surface plot')
     plt.show()
+
+def contour_plot(z, xlabel='X', ylabel='Y', title='contour plot', 
+                    levels=[10, 20, 30]):
+    plt.contourf(z, levels=levels)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
+
+    plt.show()

@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from plot_data import scatter_plot, plot, surface_plot
+from plot_data import scatter_plot, plot, surface_plot, contour_plot
 from loss import mse_loss
 from gradient_descent import gd
 
@@ -42,4 +42,7 @@ if __name__=='__main__':
             t = np.array([theta0[i], theta1[j]]).reshape(2,1)
             losses[i][j] = mse_loss(X, y, t)
 
-    surface_plot(theta0, theta1, losses)
+    #surface_plot(theta0, theta1, losses)
+   
+    # visualize contour plot
+    contour_plot(losses, levels=np.logspace(-2, 3, 20))
