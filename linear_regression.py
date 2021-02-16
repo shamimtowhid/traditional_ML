@@ -4,7 +4,7 @@ import numpy as np
 from plot_data import scatter_plot, plot, surface_plot, contour_plot
 from loss import mse_loss
 from gradient_descent import gd
-from utils import regression_predict
+from utils import regression_predict, feature_normalize
 
 if __name__=='__main__':
     #load data
@@ -33,6 +33,10 @@ if __name__=='__main__':
     print("For population = 70,000, we predict a profit of {}".format(
             regression_predict(np.array([1, 7.0]), theta)*10000))
 
+#    X_norm, mu, sigma = feature_normalize(X)
+
+#    print(X_norm.head())
+#    print(mu, sigma)
     # visualize training data with linear regression fit
 #    plt = scatter_plot(data[0], data[1], show=False)
 #    plot(X[1], regression_predict(X, theta), xlabel='population of city in 10,000s',
