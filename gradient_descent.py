@@ -6,7 +6,6 @@ def gd(X, y, theta, alpha, num_iter):
     l_hist = []
     m = len(y)
     for _ in range(num_iter):
-        import pdb;pdb.set_trace()
         hypothesis = np.dot(X, theta)
         diff = (hypothesis - y.values.reshape(-1, 1))
 

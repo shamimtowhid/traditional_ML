@@ -9,17 +9,20 @@ from utils import regression_predict, feature_normalize, initialize_theta_regres
 if __name__=='__main__':
     #load data
     data = pd.read_csv('./ex1data2.txt', header= None)
-
-    # visualize data
-    #scatter_plot(data[0], data[1], xlabel='population of city in 10,000s',
-    #                ylabel='profit in $10,000s', title='scatter plot of training data')
-
     m = len(data[0])
-    #X = pd.DataFrame()
-    #X[0] = np.ones((m))
-    #X[1] = data[:][0]
-    #y = data[:][1]
-    #num_feature = X.shape[1]
+
+#-----------------for single variable regression problem----------------------------------------------------------------------
+#    visualize data
+#    scatter_plot(data[0], data[1], xlabel='population of city in 10,000s',
+#                    ylabel='profit in $10,000s', title='scatter plot of training data')
+
+#    X = pd.DataFrame()
+#    X[0] = np.ones((m))
+#    X[1] = data[:][0]
+#    y = data[:][1]
+#    num_feature = X.shape[1]
+
+#-----------------for multi variable regression problem-----------------------------------------------------------------------
     X_norm, mu, sigma = feature_normalize(data.loc[:, 0:1])
     X = pd.DataFrame()
 
@@ -30,12 +33,16 @@ if __name__=='__main__':
 
     y = data[data.columns[-1]]
 
+
+#----------------Training for regression------------------------------------------------------------------------
     theta = initialize_theta_regression(num_feature)
-    iterations = 500
+    iterations = 1500
     alpha = 0.01
 
     history, theta = gd(X, y, theta, alpha, iterations)
     plot(history, xlabel='iterations', ylabel='loss values', title='training loss')
+
+#--------visualization and prediction for single variable regression problem---------------------------------------------------
 
 #    print("For population =35,000, we predict a profit of {}".format(
 #            regression_predict(np.array([1, 3.5]), theta)*10000))
@@ -43,16 +50,13 @@ if __name__=='__main__':
 #    print("For population = 70,000, we predict a profit of {}".format(
 #            regression_predict(np.array([1, 7.0]), theta)*10000))
 
-#    X_norm, mu, sigma = feature_normalize(X)
 
-#    print(X_norm.head())
-#    print(mu, sigma)
-    # visualize training data with linear regression fit
+#     visualize training data with linear regression fit
 #    plt = scatter_plot(data[0], data[1], show=False)
 #    plot(X[1], regression_predict(X, theta), xlabel='population of city in 10,000s',
 #                    ylabel='profit in $10,000s', title='Training Data with regression fit')
 
-    # visualize loss surface
+#    visualize loss surface
 #    theta0 = np.linspace(-10, 10, 100)
 #    theta1 = np.linspace(-1, 4, 100)
 
@@ -63,7 +67,7 @@ if __name__=='__main__':
 #            t = np.array([theta0[i], theta1[j]]).reshape(2,1)
 #            losses[i][j] = mse_loss(X, y, t)
 
-    #surface_plot(theta0, theta1, losses)
+#    surface_plot(theta0, theta1, losses)
    
-    # visualize contour plot
-    #contour_plot(losses, levels=np.logspace(-2, 3, 20))
+#    visualize contour plot
+#    contour_plot(losses, levels=np.logspace(-2, 3, 20))
