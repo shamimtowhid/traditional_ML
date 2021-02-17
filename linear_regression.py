@@ -8,31 +8,40 @@ from utils import regression_predict, feature_normalize, initialize_theta_regres
 
 if __name__=='__main__':
     #load data
-    data = pd.read_csv('./ex1data1.txt', header= None)
+    data = pd.read_csv('./ex1data2.txt', header= None)
 
     # visualize data
     #scatter_plot(data[0], data[1], xlabel='population of city in 10,000s',
     #                ylabel='profit in $10,000s', title='scatter plot of training data')
 
     m = len(data[0])
+    #X = pd.DataFrame()
+    #X[0] = np.ones((m))
+    #X[1] = data[:][0]
+    #y = data[:][1]
+    #num_feature = X.shape[1]
+    X_norm, mu, sigma = feature_normalize(data.loc[:, 0:1])
     X = pd.DataFrame()
-    X[0] = np.ones((m))
-    X[1] = data[:][0]
-    y = data[:][1]
-    num_feature = X.shape[1]
-    theta = initialize_theta_regression(num_feature)
 
-    iterations = 1500
+    X[0] = np.ones((m))
+    X[1] = X_norm[0]
+    X[2] = X_norm[1]
+    num_feature = X.shape[1]
+
+    y = data[data.columns[-1]]
+
+    theta = initialize_theta_regression(num_feature)
+    iterations = 500
     alpha = 0.01
 
     history, theta = gd(X, y, theta, alpha, iterations)
     plot(history, xlabel='iterations', ylabel='loss values', title='training loss')
 
-    print("For population =35,000, we predict a profit of {}".format(
-            regression_predict(np.array([1, 3.5]), theta)*10000))
+#    print("For population =35,000, we predict a profit of {}".format(
+#            regression_predict(np.array([1, 3.5]), theta)*10000))
 
-    print("For population = 70,000, we predict a profit of {}".format(
-            regression_predict(np.array([1, 7.0]), theta)*10000))
+#    print("For population = 70,000, we predict a profit of {}".format(
+#            regression_predict(np.array([1, 7.0]), theta)*10000))
 
 #    X_norm, mu, sigma = feature_normalize(X)
 
