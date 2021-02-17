@@ -4,7 +4,7 @@ import numpy as np
 from plot_data import scatter_plot, plot, surface_plot, contour_plot
 from loss import mse_loss
 from gradient_descent import gd
-from utils import regression_predict, feature_normalize
+from utils import regression_predict, feature_normalize, initialize_theta_regression
 
 if __name__=='__main__':
     #load data
@@ -19,7 +19,8 @@ if __name__=='__main__':
     X[0] = np.ones((m))
     X[1] = data[:][0]
     y = data[:][1]
-    theta = np.zeros((2, 1))
+    num_feature = X.shape[1]
+    theta = initialize_theta_regression(num_feature)
 
     iterations = 1500
     alpha = 0.01
