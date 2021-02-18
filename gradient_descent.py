@@ -2,6 +2,7 @@ import numpy as np
 
 from loss import mse_loss
 
+
 def gd(X, y, theta, alpha, num_iter):
     l_hist = []
     m = len(y)
@@ -22,7 +23,7 @@ def _gd(X, y, theta, alpha, num_iter):
     l_hist = []
     m = len(y)
     for _ in range(num_iter):
-        hypothesis = (theta[:][1]* X[:][1]) + theta[:][0]
+        hypothesis = (theta[:][1] * X[:][1]) + theta[:][0]
         diff = (hypothesis - y)
 
         gradient1 = np.sum(diff*X[:][0])

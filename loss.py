@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def mse_loss(X, y, theta):
     m = len(y)
 

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def regression_predict(X, theta):
     return np.dot(X, theta)
 
@@ -18,6 +19,7 @@ def feature_normalize(X):
 
     X_norm = (X-mu)/sigma
     return X_norm, mu, sigma
+
 
 def initialize_theta_regression(num_features):
     return np.zeros((num_features, 1))

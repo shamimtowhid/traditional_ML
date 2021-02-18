@@ -6,12 +6,12 @@ from loss import mse_loss
 from gradient_descent import gd
 from utils import regression_predict, feature_normalize, initialize_theta_regression
 
-if __name__=='__main__':
-    #load data
-    data = pd.read_csv('./ex1data2.txt', header= None)
+if __name__ == '__main__':
+    # load data
+    data = pd.read_csv('./ex1data2.txt', header=None)
     m = len(data[0])
 
-#-----------------for single variable regression problem----------------------------------------------------------------------
+# -----------------for single variable regression problem----------------------------------------------------------------------
 #    visualize data
 #    scatter_plot(data[0], data[1], xlabel='population of city in 10,000s',
 #                    ylabel='profit in $10,000s', title='scatter plot of training data')
@@ -22,7 +22,7 @@ if __name__=='__main__':
 #    y = data[:][1]
 #    num_feature = X.shape[1]
 
-#-----------------for multi variable regression problem-----------------------------------------------------------------------
+# -----------------for multi variable regression problem-----------------------------------------------------------------------
     X_norm, mu, sigma = feature_normalize(data.loc[:, 0:1])
     X = pd.DataFrame()
 
@@ -34,7 +34,7 @@ if __name__=='__main__':
     y = data[data.columns[-1]]
 
 
-#----------------Training for regression------------------------------------------------------------------------
+# ----------------Training for regression------------------------------------------------------------------------
     theta = initialize_theta_regression(num_feature)
     iterations = 1500
     alpha = 0.01
@@ -42,7 +42,7 @@ if __name__=='__main__':
     history, theta = gd(X, y, theta, alpha, iterations)
     plot(history, xlabel='iterations', ylabel='loss values', title='training loss')
 
-#--------visualization and prediction for single variable regression problem---------------------------------------------------
+# --------visualization and prediction for single variable regression problem---------------------------------------------------
 
 #    print("For population =35,000, we predict a profit of {}".format(
 #            regression_predict(np.array([1, 3.5]), theta)*10000))
@@ -68,6 +68,6 @@ if __name__=='__main__':
 #            losses[i][j] = mse_loss(X, y, t)
 
 #    surface_plot(theta0, theta1, losses)
-   
+
 #    visualize contour plot
 #    contour_plot(losses, levels=np.logspace(-2, 3, 20))
