@@ -31,7 +31,6 @@ def plot(y, x=None, xlabel='X', ylabel='Y', title='plot', show=True):
 
 
 def surface_plot(x, y, z):
-    fig = plt.figure()
     ax = plt.axes(projection='3d')
 
     ax.plot_surface(x, y, z, cmap='viridis', edgecolor='none')

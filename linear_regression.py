@@ -1,17 +1,18 @@
 import pandas as pd
 import numpy as np
 
-from plot_data import scatter_plot, plot, surface_plot, contour_plot
-from loss import mse_loss
+# from loss import mse_loss
+# from plot_data we can import scatter_plot, surface_plot, contour_plot
+from plot_data import plot
 from gradient_descent import gd
-from utils import regression_predict, feature_normalize, initialize_theta_regression
+# from utils we can import regression_predict
+from utils import feature_normalize, initialize_theta_regression
 
 if __name__ == '__main__':
-    # load data
     data = pd.read_csv('./ex1data2.txt', header=None)
     m = len(data[0])
 
-# -----------------for single variable regression problem----------------------------------------------------------------------
+# -----------------for single variable regression problem--------------------------------------------------------
 #    visualize data
 #    scatter_plot(data[0], data[1], xlabel='population of city in 10,000s',
 #                    ylabel='profit in $10,000s', title='scatter plot of training data')
@@ -22,7 +23,7 @@ if __name__ == '__main__':
 #    y = data[:][1]
 #    num_feature = X.shape[1]
 
-# -----------------for multi variable regression problem-----------------------------------------------------------------------
+# -----------------for multi variable regression problem---------------------------------------------------------
     X_norm, mu, sigma = feature_normalize(data.loc[:, 0:1])
     X = pd.DataFrame()
 
@@ -42,7 +43,7 @@ if __name__ == '__main__':
     history, theta = gd(X, y, theta, alpha, iterations)
     plot(history, xlabel='iterations', ylabel='loss values', title='training loss')
 
-# --------visualization and prediction for single variable regression problem---------------------------------------------------
+# --------visualization and prediction for single variable regression problem------------------------------------
 
 #    print("For population =35,000, we predict a profit of {}".format(
 #            regression_predict(np.array([1, 3.5]), theta)*10000))
