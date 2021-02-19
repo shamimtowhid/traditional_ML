@@ -1,4 +1,6 @@
 # Traditional_ML
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+
 This is a python package that contains various traditional machine learning algorithms. 
 
 ## How to use this package
