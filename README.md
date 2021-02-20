@@ -16,8 +16,10 @@ To install this package, user needs to install the following things at first-
 
 ## Installation
 User can install this package by executing the following command-
-<pre>pip install traditional_ml</pre>
-Right now, the beta version will be installed with the above command. The package will be improved over time.
+
+`pip install -i https://test.pypi.org/simple/ traditional-ml`
+
+Right now, the alpha version will be installed with the above command. The package will be improved over time.
 Very soon the full version will be released with some more algorithm implemented. 
 
 ## Algorithm Lists
