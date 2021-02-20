@@ -15,4 +15,12 @@ To install this package, user needs to install the following things at first-
   - matplotlib==3.3.4
 
 ## Installation
-coming soon...
+User can install this package by executing the following command-
+<pre>pip install traditional_ml</pre>
+Right now, the beta version will be installed with the above command. The package will be improved over time.
+Very soon the full version will be released with some more algorithm implemented. 
+
+## Algorithm Lists
+At present, User can use the following algorithms.
+
+  1. Linear Regression
