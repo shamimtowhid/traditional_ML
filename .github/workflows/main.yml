@@ -6,8 +6,8 @@ name: Python package build and publish
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
 
 jobs:
   build-n-publish:
