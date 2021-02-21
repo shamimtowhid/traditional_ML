@@ -1,8 +1,10 @@
 name: Python package build
 
 on:
+  push:
+    branches: [dev]
   pull_request:
-    branches: [ main ]
+    branches: [dev]
 
 jobs:
   build:
