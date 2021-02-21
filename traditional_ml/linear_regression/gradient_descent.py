@@ -1,6 +1,6 @@
 import numpy as np
 
-from traditional_ml.loss import mse_loss
+from traditional_ml.linear_regression.loss import mse_loss
 
 
 def gd(X, y, theta, alpha, num_iter):
