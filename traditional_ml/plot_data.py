@@ -1,11 +1,14 @@
 import matplotlib.pyplot as plt
 
 
-def scatter_plot(x, y, m='+', xlabel='X', ylabel='Y', title='scatter plot', show=True):
+def scatter_plot(x, y, m='+', xlabel='X', ylabel='Y', title='scatter plot', show=True, legend=None):
     plt.scatter(x, y, marker=m)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
+
+    if legend:
+        plt.legend(legend)
 
     if show:
         plt.show()
