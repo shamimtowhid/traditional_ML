@@ -1,3 +1,2 @@
 from traditional_ml.linear_regression.gradient_descent import gd
 from traditional_ml.linear_regression.loss import mse_loss
-from traditional_ml.linear_regression.utils import regression_predict, feature_normalize, initialize_theta_regression
