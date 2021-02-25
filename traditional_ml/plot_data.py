@@ -51,10 +51,11 @@ def contour_plot(z, xlabel='X', ylabel='Y', title='contour plot',
 
     plt.show()
 
+
 def plot_decision_boundary(x, theta, xlabel='X', ylabel='Y', title='plot'):
     m, n = x.shape
 
-    if n<=3:
+    if n <= 3:
         plot_x = np.array([np.min(x[1])-2, np.max(x[1])+2])
         plot_y = (-1/theta[-1]) * (theta[1] * plot_x + theta[0])
 
