@@ -1,3 +1,4 @@
+import numpy as np
 import matplotlib.pyplot as plt
 
 
@@ -49,3 +50,15 @@ def contour_plot(z, xlabel='X', ylabel='Y', title='contour plot',
     plt.title(title)
 
     plt.show()
+
+def plot_decision_boundary(x, theta, xlabel='X', ylabel='Y', title='plot'):
+    m, n = x.shape
+
+    if n<=3:
+        plot_x = np.array([np.min(x[1])-2, np.max(x[1])+2])
+        plot_y = (-1/theta[-1]) * (theta[1] * plot_x + theta[0])
+
+        plot(plot_y, plot_x, xlabel, ylabel, title)
+
+    else:
+        print('Decision Boundary can be plot for only two features Dataset.')
