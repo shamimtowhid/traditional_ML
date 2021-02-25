@@ -6,7 +6,7 @@ from traditional_ml.logistic_regression.activation import sigmoid
 def gradient(theta, X, y):
     m, n = X.shape
 
-    theta = theta.reshape((n,1))
+    theta = theta.reshape((n, 1))
     y = y.values.reshape((m, 1))
 
     sigmoid_x_theta = sigmoid(X.dot(theta))
@@ -18,7 +18,7 @@ def gradient(theta, X, y):
 def logistic_loss(theta, X, y):
     m, n = X.shape
 
-    theta = theta.reshape((n,1))
+    theta = theta.reshape((n, 1))
     y = y.values.reshape((m, 1))
 
     term1 = np.log(sigmoid(X.dot(theta)))
