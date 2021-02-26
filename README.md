@@ -26,3 +26,4 @@ Very soon the full version will be released with some more algorithm implemented
 At present, User can use the following algorithms.
 
   1. Linear Regression
+  2. Logistic Regression

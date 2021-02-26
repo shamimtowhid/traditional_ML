@@ -1,4 +1,8 @@
+import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.pylab import contour, title, xlabel, ylabel, show
+
+from traditional_ml.logistic_regression import map_feature
 
 
 def scatter_plot(x, y, m='+', xlabel='X', ylabel='Y', title='scatter plot', show=True, legend=None):
@@ -49,3 +53,33 @@ def contour_plot(z, xlabel='X', ylabel='Y', title='contour plot',
     plt.title(title)
 
     plt.show()
+
+
+def plot_decision_boundary(x, theta, xlabel='X', ylabel='Y', title='plot'):
+    m, n = x.shape
+
+    if n <= 3:
+        plot_x = np.array([np.min(x[1])-2, np.max(x[1])+2])
+        plot_y = (-1/theta[-1]) * (theta[1] * plot_x + theta[0])
+
+        plot(plot_y, plot_x, xlabel, ylabel, title)
+
+    else:
+        print('Decision Boundary can be plot for only two features Dataset.')
+
+
+def plot_non_linear_boundary(theta, degree=6, Xlabel='X', Ylabel='Y', plot_title='plot'):
+    u = np.linspace(-1, 1.5, 50)
+    v = np.linspace(-1, 1.5, 50)
+    z = np.zeros((len(u), len(v)))
+
+    for i in range(len(u)):
+        for j in range(len(v)):
+            z[i, j] = (map_feature(np.array(u[i]), np.array(v[j]), degree).dot(np.array(theta)))
+
+    z = z.T
+    contour(u, v, z)
+    title(plot_title)
+    xlabel(Xlabel)
+    ylabel(Ylabel)
+    show()
