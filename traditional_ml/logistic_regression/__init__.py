@@ -1,3 +1,4 @@
 from traditional_ml.logistic_regression.loss import gradient, logistic_loss
 from traditional_ml.logistic_regression.activation import sigmoid
 from traditional_ml.logistic_regression.optimize import optimize_theta
+from traditional_ml.logistic_regression.map_feature import map_feature

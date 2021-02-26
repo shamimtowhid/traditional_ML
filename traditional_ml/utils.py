@@ -1,7 +1,9 @@
 import numpy as np
 
+from traditional_ml.logistic_regression import sigmoid
 
-def predict(X, theta):
+
+def lin_regression_predict(X, theta):
     return np.dot(X, theta)
 
 
@@ -23,3 +25,17 @@ def feature_normalize(X):
 
 def initialize_theta(num_features):
     return np.zeros((num_features, 1))
+
+def log_regression_predict(X, theta):
+    m, n = X.shape
+    p = np.zeros((m, 1))
+
+    h = sigmoid(X.dot(theta.T))
+
+    for it in range(0, h.shape[0]):
+        if h[it] > 0.5:
+            p[it, 0] = 1
+        else:
+            p[it, 0] = 0
+
+    return p
