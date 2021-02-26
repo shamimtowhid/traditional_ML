@@ -26,6 +26,7 @@ def feature_normalize(X):
 def initialize_theta(num_features):
     return np.zeros((num_features, 1))
 
+
 def log_regression_predict(X, theta):
     m, n = X.shape
     p = np.zeros((m, 1))
