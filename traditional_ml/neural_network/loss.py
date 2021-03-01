@@ -8,8 +8,8 @@ def sigmoid_grad(z):
 
     simpleg = 1./(1. + np.exp(-1*z))
     diffg = 1-simpleg
-    return simpleg*diffg
-
+    g = simpleg*diffg
+    return g
 
 
 def nn_loss(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, lamda):
@@ -30,7 +30,7 @@ def nn_loss(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, la
 # create one hot vector
     temp = np.zeros((m, num_labels))
     for i in range(m):
-# -1 in the following line is for matching the index with octave indexing
+        # -1 in the following line is for matching the index with octave indexing
         temp[i, y[i]-1] = 1
     y = temp
 
@@ -55,7 +55,7 @@ def nn_loss(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, la
     jsum2 = np.sum(ksum2)
 
     regularized_term = lamda/(2.*m)*(jsum+jsum2)
-    
+
     loss = (-(1./m)*ssum)+regularized_term
     grad = np.array(theta1_grad[:], theta2_grad[:])
 
