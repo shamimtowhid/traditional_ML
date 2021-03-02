@@ -12,7 +12,7 @@ def sigmoid_grad(z):
     return g
 
 
-def nn_loss(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, lamda):
+def nn_loss_grad(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, lamda):
     theta1 = nn_params[0]
     theta2 = nn_params[1]
 
@@ -26,7 +26,7 @@ def nn_loss(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, la
     layer2 = sigmoid(Z2)
     layer2 = np.insert(layer2, 0, 1, axis=1)
     hypothesis = sigmoid(layer2.dot(theta2.T))
-# create one hot vector
+
     temp = np.zeros((m, num_labels))
     for i in range(m):
         # -1 in the following line is for matching the index with octave indexing
@@ -44,6 +44,30 @@ def nn_loss(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, la
     theta1_grad = delta1/m + (lamda/m) * tmp_theta1
     theta2_grad = delta2/m + (lamda/m) * tmp_theta2
 
+    grad = np.array([theta1_grad[:], theta2_grad[:]])
+
+    return grad.flatten()
+
+
+def nn_loss(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, lamda):
+    theta1 = nn_params[0]
+    theta2 = nn_params[1]
+
+    m, n = X.shape
+
+
+    X = np.insert(X, 0, 1, axis=1)
+    Z2 = X.dot(theta1.T)
+    layer2 = sigmoid(Z2)
+    layer2 = np.insert(layer2, 0, 1, axis=1)
+    hypothesis = sigmoid(layer2.dot(theta2.T))
+# create one hot vector
+    temp = np.zeros((m, num_labels))
+    for i in range(m):
+        # -1 in the following line is for matching the index with octave indexing
+        temp[i, y[i]-1] = 1
+    y = temp
+
     fsum = np.sum((temp*np.log(hypothesis)) + ((1-temp)*np.log(1-hypothesis)))
     ssum = np.sum(fsum)
 
@@ -58,6 +82,5 @@ def nn_loss(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, la
     regularized_term = lamda/(2.*m)*(jsum+jsum2)
 
     loss = (-(1./m)*ssum)+regularized_term
-    grad = np.array([theta1_grad[:], theta2_grad[:]])
 
-    return loss, grad
+    return loss

@@ -1,2 +1,4 @@
 from traditional_ml.neural_network.predict import nn_predict
 from traditional_ml.neural_network.loss import nn_loss
+from traditional_ml.neural_network.rand_weight_init import rand_init_weight
+from traditional_ml.neural_network.optimize import optimize_theta
