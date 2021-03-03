@@ -1,6 +1,6 @@
 import scipy.optimize as op
 
-from traditional_ml.neural_network.loss import nn_loss, nn_loss_grad
+from traditional_ml.neural_network.loss import nn_loss
 
 
 def optimize_theta(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, lamda):

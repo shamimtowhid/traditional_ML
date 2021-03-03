@@ -12,75 +12,46 @@ def sigmoid_grad(z):
     return g
 
 
-def nn_loss_grad(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, lamda):
-    theta1 = nn_params[0]
-    theta2 = nn_params[1]
-
-    m, n = X.shape
-
-    theta1_grad = np.zeros(theta1.shape)
-    theta2_grad = np.zeros(theta2.shape)
-
-    X = np.insert(X, 0, 1, axis=1)
-    Z2 = X.dot(theta1.T)
-    layer2 = sigmoid(Z2)
-    layer2 = np.insert(layer2, 0, 1, axis=1)
-    hypothesis = sigmoid(layer2.dot(theta2.T))
-
-    temp = np.zeros((m, num_labels))
+def nn_loss(nn_params,input_layer_size, hidden_layer_size, num_labels,X, y,Lambda):
+    # Reshape nn_params back into the parameters Theta1 and Theta2
+    Theta1 = nn_params[:((input_layer_size+1) * hidden_layer_size)].reshape(hidden_layer_size,input_layer_size+1)
+    Theta2 = nn_params[((input_layer_size +1)* hidden_layer_size ):].reshape(num_labels,hidden_layer_size+1)
+    
+    m = X.shape[0]
+    J=0
+    X = np.hstack((np.ones((m,1)),X))
+    y10 = np.zeros((m,num_labels))
+    
+    a1 = sigmoid(X @ Theta1.T) # @ sign is used for matrix multiplication, introduced in python 3.5
+    a1 = np.hstack((np.ones((m,1)), a1)) # hidden layer
+    a2 = sigmoid(a1 @ Theta2.T) # output layer
+    
+    for i in range(1,num_labels+1):
+        y10[:,i-1][:,np.newaxis] = np.where(y==i,1,0)
+    for j in range(num_labels):
+        J = J + sum(-y10[:,j] * np.log(a2[:,j]) - (1-y10[:,j])*np.log(1-a2[:,j]))
+    
+    cost = 1/m* J
+    reg_J = cost + Lambda/(2*m) * (np.sum(Theta1[:,1:]**2) + np.sum(Theta2[:,1:]**2))
+    
+    # Implement the backpropagation algorithm to compute the gradients
+    
+    grad1 = np.zeros((Theta1.shape))
+    grad2 = np.zeros((Theta2.shape))
+    
     for i in range(m):
-        # -1 in the following line is for matching the index with octave indexing
-        temp[i, y[i]-1] = 1
-    y = temp
-
-    sigma3 = hypothesis - y
-    sigma2 = (sigma3.dot(theta2) * sigmoid_grad(np.insert(Z2, 0, 1, axis=1)))[:, 1:]
-
-    delta1 = (sigma2.T).dot(X)
-    delta2 = (sigma3.T).dot(layer2)
-
-    tmp_theta1 = np.insert(theta1[:, 1:], 0, 0, axis=1)
-    tmp_theta2 = np.insert(theta2[:, 1:], 0, 0, axis=1)
-    theta1_grad = delta1/m + (lamda/m) * tmp_theta1
-    theta2_grad = delta2/m + (lamda/m) * tmp_theta2
-
-    grad = np.array([theta1_grad[:], theta2_grad[:]])
-
-    return grad.flatten()
-
-
-def nn_loss(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, lamda):
-    theta1 = nn_params[0]
-    theta2 = nn_params[1]
-
-    m, n = X.shape
-
-
-    X = np.insert(X, 0, 1, axis=1)
-    Z2 = X.dot(theta1.T)
-    layer2 = sigmoid(Z2)
-    layer2 = np.insert(layer2, 0, 1, axis=1)
-    hypothesis = sigmoid(layer2.dot(theta2.T))
-# create one hot vector
-    temp = np.zeros((m, num_labels))
-    for i in range(m):
-        # -1 in the following line is for matching the index with octave indexing
-        temp[i, y[i]-1] = 1
-    y = temp
-
-    fsum = np.sum((temp*np.log(hypothesis)) + ((1-temp)*np.log(1-hypothesis)))
-    ssum = np.sum(fsum)
-
-    theta1[:, 0] = 0
-    theta2[:, 0] = 0
-
-    ksum = np.sum(np.square(theta1))
-    jsum = np.sum(ksum)
-    ksum2 = np.sum(np.square(theta2))
-    jsum2 = np.sum(ksum2)
-
-    regularized_term = lamda/(2.*m)*(jsum+jsum2)
-
-    loss = (-(1./m)*ssum)+regularized_term
-
-    return loss
+        xi= X[i,:] # 1 X 401
+        a1i = a1[i,:] # 1 X 26
+        a2i =a2[i,:] # 1 X 10
+        d2 = a2i - y10[i,:]
+        d1 = Theta2.T @ d2.T * sigmoid_grad(np.hstack((1,xi @ Theta1.T)))
+        grad1= grad1 + d1[1:][:,np.newaxis] @ xi[:,np.newaxis].T
+        grad2 = grad2 + d2.T[:,np.newaxis] @ a1i[:,np.newaxis].T
+        
+    grad1 = 1/m * grad1
+    grad2 = 1/m*grad2
+    
+    grad1_reg = grad1 + (Lambda/m) * np.hstack((np.zeros((Theta1.shape[0],1)),Theta1[:,1:]))
+    grad2_reg = grad2 + (Lambda/m) * np.hstack((np.zeros((Theta2.shape[0],1)),Theta2[:,1:]))
+    
+    return cost, grad1, grad2,reg_J, grad1_reg,grad2_reg
