@@ -27,3 +27,4 @@ At present, User can use the following algorithms.
 
   1. Linear Regression
   2. Logistic Regression
+  3. Neural Network
