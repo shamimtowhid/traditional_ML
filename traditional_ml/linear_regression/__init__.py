@@ -1,2 +1,2 @@
 from traditional_ml.linear_regression.gradient_descent import gd
-from traditional_ml.linear_regression.loss import mse_loss
+from traditional_ml.linear_regression.loss import mse_loss, mse_loss_gradient

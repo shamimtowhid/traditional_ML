@@ -1,10 +1,9 @@
-import numpy as np
 from tqdm import tqdm
 
 from traditional_ml.linear_regression.loss import mse_loss, mse_loss_gradient
 
 
-#def gd(X, y, theta, alpha, num_iter):
+# def gd(X, y, theta, alpha, num_iter):
 #    l_hist = []
 #    m = len(y)
 #    for _ in range(num_iter):
@@ -22,7 +21,6 @@ from traditional_ml.linear_regression.loss import mse_loss, mse_loss_gradient
 
 def gd(X, y, theta, alpha, num_iter, lamda=0):
     l_hist = []
-    m = len(y)
     y = y.values if hasattr(y, 'values') else y
 
     for _ in tqdm(range(num_iter)):
