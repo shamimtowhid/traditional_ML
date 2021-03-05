@@ -5,12 +5,12 @@ def mse_loss(X, y, theta, lamda=0):
     m = len(y)
     loss = 0
 
-    y = y.values if hasattr(y, 'values') else y
+    y = y.values.reshape(-1, 1) if hasattr(y, 'values') else y.reshape(-1, 1)
 
     hypothesis = np.dot(X, theta)
     diff = np.sum(np.square(hypothesis-y.reshape(-1, 1)))
 
-    theta_sum = np.sum(np.square(theta[:, 1:]))
+    theta_sum = np.sum(np.square(theta[1:]))
     regularized_term = (lamda/(2*m)) * theta_sum
 
     loss = (1/(2*m) * diff) + regularized_term
@@ -21,7 +21,6 @@ def mse_loss(X, y, theta, lamda=0):
 def mse_loss_gradient(X, y, theta, lamda=0):
     m = len(y)
     grad = np.zeros(theta.shape)
-
     regularized_term_grad = (lamda/m)*np.r_[[[0]], theta[1:]]
 
     hypothesis = np.dot(X, theta)
