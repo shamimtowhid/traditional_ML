@@ -5,8 +5,6 @@ def mse_loss(X, y, theta, lamda=0):
     m = len(y)
     loss = 0
 
-    y = y.values.reshape(-1, 1) if hasattr(y, 'values') else y.reshape(-1, 1)
-
     hypothesis = np.dot(X, theta)
     diff = np.sum(np.square(hypothesis-y.reshape(-1, 1)))
 
