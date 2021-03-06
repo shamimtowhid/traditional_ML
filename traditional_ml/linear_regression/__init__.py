@@ -1,2 +1,3 @@
 from traditional_ml.linear_regression.gradient_descent import gd
 from traditional_ml.linear_regression.loss import mse_loss, mse_loss_gradient
+from traditional_ml.linear_regression.poly_feature import poly_features
