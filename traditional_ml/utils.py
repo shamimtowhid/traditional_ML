@@ -1,6 +1,8 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 from traditional_ml.logistic_regression import sigmoid
+from traditional_ml.linear_regression import gd, mse_loss
 
 
 def lin_regression_predict(X, theta):
@@ -42,3 +44,35 @@ def log_regression_predict(X, theta, num_cls=2):
             else:
                 p[it, 0] = 0
         return p
+
+
+def trainLinearRegression(Xtrain, y_train, lamda):
+    feature = Xtrain.shape[1]
+    theta = initialize_theta(feature)
+
+    _, theta = gd(Xtrain, y_train, theta, 0.001, 200, lamda)
+
+    return theta
+
+
+def plot_learning_curve(X, y, Xval, yval, lamda):
+    m = X.shape[0]
+    y = y.values.reshape(-1, 1) if hasattr(y, 'values') else y.reshape(-1, 1)
+
+    error_train = np.zeros((m, 1))
+    error_val = np.zeros((m, 1))
+
+    for idx, i in enumerate(range(1, m+1)):
+        X_train = X[:i, :]
+        y_train = y[:i]
+
+        theta = trainLinearRegression(X_train, y_train, lamda)
+        error_train[idx] = mse_loss(X_train, y_train, theta, 0)
+        error_val[idx] = mse_loss(Xval, yval, theta, 0)
+
+    plt.plot(error_train, label="train error")
+    plt.plot(error_val, label="valid error")
+    plt.title("Learning Curve")
+    plt.legend()
+    plt.xlabel('training data size')
+    plt.ylabel('error')
