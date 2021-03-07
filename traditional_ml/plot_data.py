@@ -20,13 +20,13 @@ def scatter_plot(x, y, m='+', xlabel='X', ylabel='Y', title='scatter plot', show
         return plt
 
 
-def plot(y, x=None, xlabel='X', ylabel='Y', title='plot', show=True):
+def plot(y, x=None, xlabel='X', ylabel='Y', title='plot', show=True, label='label'):
     if x is None:
         x = [i for i in range(len(y))]
 
     assert len(x) == len(y), 'for plotting, length must be equal'
 
-    plt.plot(x, y)
+    plt.plot(x, y, label=label)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
@@ -68,14 +68,14 @@ def plot_decision_boundary(x, theta, xlabel='X', ylabel='Y', title='plot'):
         print('Decision Boundary can be plot for only two features Dataset.')
 
 
-def plot_non_linear_boundary(theta, degree=6, Xlabel='X', Ylabel='Y', plot_title='plot'):
+def plot_non_linear_boundary(theta, Xlabel='X', Ylabel='Y', plot_title='plot'):
     u = np.linspace(-1, 1.5, 50)
     v = np.linspace(-1, 1.5, 50)
     z = np.zeros((len(u), len(v)))
 
     for i in range(len(u)):
         for j in range(len(v)):
-            z[i, j] = (map_feature(np.array(u[i]), np.array(v[j]), degree).dot(np.array(theta)))
+            z[i, j] = (map_feature(np.array(u[i]), np.array(v[j])).dot(np.array(theta)))
 
     z = z.T
     contour(u, v, z)
