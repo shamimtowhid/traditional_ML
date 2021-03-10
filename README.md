@@ -29,3 +29,4 @@ At present, User can use the following algorithms.
   2. Logistic Regression
   3. Neural Network
   4. Polynomial Regression
+  5. SVM
