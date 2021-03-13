@@ -26,6 +26,16 @@ def feature_normalize(X):
 
 
 def initialize_theta(num_features):
+    '''
+    This function initialize theta values to zeros for using in machine learning algorithm.
+
+    Parameters:
+        num_features (int): Number of features in the training data.
+
+    Return:
+        A numpy array of zeros. The shape depends on the number of features.
+        For m number of feature, the return shape will be (m x 1)
+    '''
     return np.zeros((num_features, 1))
 
 
